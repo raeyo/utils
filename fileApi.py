@@ -44,6 +44,10 @@ def load_json_to_dic(json_path):
         dic = json.load(j_file)
     return dic
 
+def save_dic_to_json(dic, json_path):
+    with open(json_path, 'w') as j_file:
+        json.dump(dic, j_file, sort_keys=True, indent=4)
+
 def check_and_create_dir(dir_path):
     if not check_dir(dir_path):
         os.mkdir(dir_path)
