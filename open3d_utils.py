@@ -3,15 +3,14 @@ import open3d as o3d
 
 from open3d.visualization import Visualizer
 
-# relative import
 if __package__ is '':
   import sys
   from os import path
   print(path.dirname( path.dirname( path.abspath(__file__) ) ))
   sys.path.append(path.dirname( path.dirname( path.abspath(__file__) ) ))
-  from fileApi import get_dir_list, get_file_list
+  from dataset_utils import get_3D_Net_models
 else:
-  from .fileApi import get_dir_list, get_file_list
+  from .dataset_utils import get_3D_Net_models
 
 """Visualizer
 http://www.open3d.org/docs/0.9.0/python_api/open3d.visualization.Visualizer.html#open3d.visualization.Visualizer
@@ -91,15 +90,17 @@ class PointCloudVisualizer:
   
   def rotate_view(self, vis):
     ctr = vis.get_view_control()
-    x0, y0, z0 = self.current_xyz
     ctr.rotate(5.0, 0.0)
     return False
 
 
 
 if __name__=="__main__":
-  point_cloud_root = "/home/raeyo/dataset/3D_Net/"
-  
+  object_point_cloud = get_3D_Net_models()
+  whole_point_cloud = []
+  for object_name in object_point_cloud.keys():
+    whole_point_cloud += object_point_cloud[object_name]
+  PointCloudVisualizer(whole_point_cloud)
   
   
     

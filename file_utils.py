@@ -31,9 +31,12 @@ def get_dir_list(path):
 
     return dir_list
 
+def get_dir_name(path):
+    return path.split("/")[-1]
+
 def get_file_name(path):
-    file_path, ext = splitext(path)
-    return file_path.split("/")[-1], ext
+    file_path, _ = splitext(path)
+    return file_path.split("/")[-1]
 
 def check_and_create_dir(dir_path):
     if not check_dir(dir_path):
